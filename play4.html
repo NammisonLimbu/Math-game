@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Game - Division Mode</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      text-align: center;
+      padding-top: 50px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="greeting"></h1>
+  <h2 id="question">Loading question...</h2>
+  <input type="number" id="answer" placeholder="Your answer" />
+  <button onclick="submitAnswer()">Submit</button>
+  <p>⏱️ Time left: <span id="time">30</span>s</p>
+  <p>🏆 Score: <span id="score">0</span></p>
+
+  <script>
+    const username = localStorage.getItem("username") || "Player";
+    const mode = localStorage.getItem("mode") || "division";  // mode is division here
+    document.getElementById("greeting").innerText = `${username}, get ready for ${mode} questions!`;
+
+    let score = 0;
+    let time = 30;
+    let correctAnswer;
+    let timer;
+
+    // This function generates the question
+    function generateQuestion() {
+      let a = Math.floor(Math.random() * 50) + 10; // Ensure larger numbers for division
+      let b = Math.floor(Math.random() * 10) + 1;  // Ensure no divide-by-zero errors
+
+      correctAnswer = a / b;
+      document.getElementById("question").innerText = `What is ${a} ÷ ${b}?`;
+    }
+
+    // This function submits the user's answer
+    function submitAnswer() {
+      let userAnswer = parseFloat(document.getElementById("answer").value); // Using parseFloat for division results with decimals
+      if (Math.abs(userAnswer - correctAnswer) < 0.01) { // Allow small rounding errors in division
+        score++;
+        document.getElementById("score").innerText = score;
+      }
+      document.getElementById("answer").value = ""; // Clear input field
+      generateQuestion(); // Generate next question
+    }
+
+    // Start the timer countdown
+    function startTimer() {
+      timer = setInterval(() => {
+        time--;
+        document.getElementById("time").innerText = time;
+        if (time === 0) {
+          clearInterval(timer); // Stop the timer when time is up
+          localStorage.setItem("finalScore", score);
+          window.location.href = "end.html"; // Redirect to end page
+        }
+      }, 1000);
+    }
+
+    // Start game by generating the first question and starting the timer
+    generateQuestion();
+    startTimer();
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!-- end.html - Fourth Website -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Over - Math Game</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 24px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 20px;
+      background-color: #ff758c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ff5e62;
+    }
+    .credit {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Game Over!</h1>
+  <p id="username"></p>
+  <p>Your score: <span id="finalScore"></span></p>
+  <button onclick="playAgain()">Play Again</button>
+  <div class="credit">Made by Nammison Limbu</div>
+
+  <script>
+    document.getElementById("finalScore").innerText = localStorage.getItem("finalScore");
+    document.getElementById("username").innerText = `Well played, ${localStorage.getItem("username")}!`;
+
+    function playAgain() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

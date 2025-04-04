@@ -1,0 +1,59 @@
+<!-- index.html - First Website -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Game - Welcome</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ff3b2e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Math Game!</h1>
+  <p>Enter your username to start:</p>
+  <input type="text" id="username" placeholder="Your name" />
+  <button onclick="startGame()">Continue</button>
+
+  <script>
+    function startGame() {
+      const username = document.getElementById("username").value;
+      if (username.trim()) {
+        localStorage.setItem("username", username);
+        window.location.href = "mode.html";
+      } else {
+        alert("Please enter a username");
+      }
+    }
+  </script>
+</body>
+</html>

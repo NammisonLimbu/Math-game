@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Game - Choose Mode</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 15px;
+      font-size: 20px;
+      margin: 15px;
+      background-color: #f8b500;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fceabb;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose your Math Mode</h1>
+  <p>Select one of the modes below to begin:</p>
+
+  <button onclick="chooseMode('addition')">Addition</button>
+  <button onclick="chooseMode('subtraction')">Subtraction</button>
+  <button onclick="chooseMode('multiplication')">Multiplication</button>
+  <button onclick="chooseMode('division')">Division</button>
+
+  <script>
+    function chooseMode(mode) {
+      localStorage.setItem("mode", mode);
+
+      // Redirect to corresponding play page based on the selected mode
+      if (mode === 'addition') {
+        window.location.href = "play.html"; // play for addition
+      } else if (mode === 'subtraction') {
+        window.location.href = "play2.html"; // play2 for subtraction
+      } else if (mode === 'multiplication') {
+        window.location.href = "play3.html"; // play3 for multiplication
+      } else if (mode === 'division') {
+        window.location.href = "play4.html"; // play4 for division
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Game - Play</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      text-align: center;
+      padding-top: 50px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="greeting"></h1>
+  <h2 id="question">Loading question...</h2>
+  <input type="number" id="answer" placeholder="Your answer" />
+  <button onclick="submitAnswer()">Submit</button>
+  <p>⏱️ Time left: <span id="time">30</span>s</p>
+  <p>🏆 Score: <span id="score">0</span></p>
+
+  <script>
+    const username = localStorage.getItem("username") || "Player";
+    const mode = localStorage.getItem("mode") || "subtraction";  // mode is subtraction here
+    document.getElementById("greeting").innerText = `${username}, get ready for ${mode} questions!`;
+
+    let score = 0;
+    let time = 30;
+    let correctAnswer;
+
+    function generateQuestion() {
+      let a = Math.floor(Math.random() * 50) + 10; // Ensure positive result
+      let b = Math.floor(Math.random() * 50);
+      
+      // Subtraction Mode Logic
+      if (mode === "subtraction") {
+        correctAnswer = a - b;
+        document.getElementById("question").innerText = `What is ${a} - ${b}?`;
+      }
+    }
+
+    function submitAnswer() {
+      let userAnswer = parseInt(document.getElementById("answer").value);
+      if (userAnswer === correctAnswer) {
+        score++;
+        document.getElementById("score").innerText = score;
+      }
+      document.getElementById("answer").value = "";
+      generateQuestion();
+    }
+
+    function startTimer() {
+      let timer = setInterval(() => {
+        time--;
+        document.getElementById("time").innerText = time;
+        if (time === 0) {
+          clearInterval(timer);
+          localStorage.setItem("finalScore", score);
+          window.location.href = "end.html";
+        }
+      }, 1000);
+    }
+
+    // Start game
+    generateQuestion();
+    startTimer();
+  </script>
+</body>
+</html>
